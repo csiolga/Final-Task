@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Suit1">
+    <test name="Chrome tests">
+        <parameter name="browser" value="chrome"/>
+        <classes>
+            <class name="gmail.LoginTest" />
+            <class name="gmail.LogoutTest" />
+            <class name="gmail.SendEmailTest" />
+            <class name="gmail.DeleteEmailTest" />
+        </classes>
+    </test>
+    <test name="Firefox tests" >
+        <parameter name="browser" value="firefox"/>
+        <classes>
+            <class name="gmail.LoginTest" />
+            <class name="gmail.LogoutTest" />
+            <class name="gmail.SendEmailTest" />
+            <class name="gmail.DeleteEmailTest" />
+        </classes>
+    </test>
+</suite>
