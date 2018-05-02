@@ -10,6 +10,13 @@
 
     <properties>
         <aspectj.version>1.8.5</aspectj.version>
+        <selenium.java.version>3.11.0</selenium.java.version>
+        <testng.version>6.14.2</testng.version>
+        <allure.testng.adaptor.version>1.5.4</allure.testng.adaptor.version>
+        <allure.java.annotations.version>1.5.4</allure.java.annotations.version>
+        <maven.compiler.plugin>1.8</maven.compiler.plugin>
+        <maven.surefire.plugin.version>2.14</maven.surefire.plugin.version>
+        <allure.maven.plugin.version>2.5</allure.maven.plugin.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     </properties>
@@ -18,28 +25,22 @@
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-java</artifactId>
-            <version>3.11.0</version>
-        </dependency>
-        <dependency>
-            <groupId>org.testng</groupId>
-            <artifactId>testng</artifactId>
-            <version>6.14.2</version>
-            <scope>test</scope>
+            <version>${selenium.java.version}</version>
         </dependency>
         <dependency>
             <groupId>ru.yandex.qatools.allure</groupId>
             <artifactId>allure-testng-adaptor</artifactId>
-            <version>1.5.4</version>
+            <version>${allure.testng.adaptor.version}</version>
         </dependency>
         <dependency>
             <groupId>ru.yandex.qatools.allure</groupId>
             <artifactId>allure-java-annotations</artifactId>
-            <version>1.5.4</version>
+            <version>${allure.java.annotations.version}</version>
         </dependency>
         <dependency>
             <groupId>org.testng</groupId>
             <artifactId>testng</artifactId>
-            <version>6.11</version>
+            <version>${testng.version}</version>
         </dependency>
     </dependencies>
 
@@ -49,14 +50,14 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <configuration>
-                    <source>1.8</source>
-                    <target>1.8</target>
+                    <source>${maven.compiler.plugin}</source>
+                    <target>${maven.compiler.plugin}</target>
                 </configuration>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
-                <version>2.14</version>
+                <version>${maven.surefire.plugin.version}</version>
                 <configuration>
                     <suiteXmlFiles>
                         <suiteXmlFile>${basedir}/src/test/resources/testng.xml</suiteXmlFile>
@@ -89,7 +90,7 @@
             <plugin>
                 <groupId>ru.yandex.qatools.allure</groupId>
                 <artifactId>allure-maven-plugin</artifactId>
-                <version>2.5</version>
+                <version>${allure.maven.plugin.version}</version>
                 <configuration>
                     <properties>
                         <allure.tests.management.pattern>https://atlassian.net/%s
@@ -99,6 +100,4 @@
             </plugin>
         </plugins>
     </reporting>
-
-
 </project>

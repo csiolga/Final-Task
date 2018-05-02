@@ -24,7 +24,7 @@ public class Driver {
     private WebDriver driver;
     private DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
     private Date date;
-    private static final int RUN_METHOD = 2; //1 = locally, 2 = cloud, 3 = selenium grid
+    private static final int RUN_METHOD = 1; //1 = locally, 2 = cloud, 3 = selenium grid
 
 
     private Driver() {}
