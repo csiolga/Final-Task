@@ -57,7 +57,7 @@ public class Driver {
                     System.setProperty("webdriver.gecko.driver", "src/test/drivers/geckodriver.exe");
                     driver = new FirefoxDriver();
                 } else {
-                    throw new Exception("Incorrect browser name");
+                    throw new RuntimeException("Incorrect browser name");
                 }
                 break;
             case 2:
@@ -66,7 +66,7 @@ public class Driver {
                 } else if (browser.equalsIgnoreCase("chrome")) {
                     desiredCaps = DesiredCapabilities.chrome();
                 } else {
-                    throw new Exception("Incorrect browser name");
+                    throw new RuntimeException("Incorrect browser name");
                 }
 
                 desiredCaps.setCapability("platform", "Windows 10");
@@ -80,12 +80,12 @@ public class Driver {
                 } else if(browser.equalsIgnoreCase("firefox")) {
                     driver = new RemoteWebDriver(new URL(GRID_URL), DesiredCapabilities.firefox());
                 }  else {
-                    throw new Exception("Incorrect browser name");
+                    throw new RuntimeException("Incorrect browser name");
                 }
                 break;
 
             default:
-                throw new Exception("Incorrect run method");
+                throw new RuntimeException("Incorrect run method");
         }
 
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
