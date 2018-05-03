@@ -51,10 +51,10 @@ public class Driver {
        switch (RUN_METHOD) {
             case 1:
                if(browser.equalsIgnoreCase("chrome")) {
-                    System.setProperty("webdriver.chrome.driver", "C:\\Selenium\\chromedriver.exe");
+                    System.setProperty("webdriver.chrome.driver", "src/test/drivers/chromedriver.exe");
                     driver = new ChromeDriver();
                 } else if(browser.equalsIgnoreCase("firefox")) {
-                    System.setProperty("webdriver.gecko.driver", "C:\\Selenium\\geckodriver.exe");
+                    System.setProperty("webdriver.gecko.driver", "src/test/drivers/geckodriver.exe");
                     driver = new FirefoxDriver();
                 } else {
                     throw new Exception("Incorrect browser name");
