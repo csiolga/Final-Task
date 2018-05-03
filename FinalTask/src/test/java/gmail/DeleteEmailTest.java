@@ -1,5 +1,6 @@
 package gmail;
 
+import config.Configuration;
 import driver.Driver;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
@@ -18,8 +19,8 @@ import testng.GmailListener;
 @Listeners(GmailListener.class)
 public class DeleteEmailTest {
 
-    private static final String USERNAME = "seleniumtests10";
-    private static final String PASSWORD = "060788avavav";
+    private static final String USERNAME = Configuration.getValue("gmail.username");
+    private static final String PASSWORD = Configuration.getValue("gmail.password");
     private WebDriver driver;
     private LoginPage loginPage;
     private HomePage homePage;

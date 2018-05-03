@@ -1,5 +1,6 @@
 package driver;
 
+import config.Configuration;
 import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -14,10 +15,12 @@ import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
 public class Driver {
-    private static final String DESTINATION_URL = "https://gmail.com";
-    private static final String USERNAME = "olgastarkova";
-    private static final String ACCESS_KEY = "06c917f0-296f-4837-9e77-aac8a4289310";
-    public static final String CLOUD_URL = "https://" + USERNAME + ":" + ACCESS_KEY + "@ondemand.saucelabs.com:443/wd/hub";
+    private static final String DESTINATION_URL = Configuration.getValue("gmail.url");
+    private static final String USERNAME = Configuration.getValue("cloud.username");
+    private static final String ACCESS_KEY = Configuration.getValue("cloud.accessKey");
+    private static final String CLOUD_DOMAIN = Configuration.getValue("cloud.domain");
+    public static final String CLOUD_URL = "https://" + USERNAME + ":" + ACCESS_KEY + CLOUD_DOMAIN;
+    private static final String GRID_URL = Configuration.getValue("grid.url");
     private DesiredCapabilities desiredCaps;
     private Capabilities cap;
     private static Driver instance = null;
@@ -72,10 +75,10 @@ public class Driver {
 
             case 3:
                 if(browser.equalsIgnoreCase("chrome")) {
-                    driver = new RemoteWebDriver(new URL("http://localhost:4444/wd/hub"), DesiredCapabilities.chrome());
+                    driver = new RemoteWebDriver(new URL(GRID_URL), DesiredCapabilities.chrome());
 
                 } else if(browser.equalsIgnoreCase("firefox")) {
-                    driver = new RemoteWebDriver(new URL("http://localhost:4444/wd/hub"), DesiredCapabilities.firefox());
+                    driver = new RemoteWebDriver(new URL(GRID_URL), DesiredCapabilities.firefox());
                 }  else {
                     throw new Exception("Incorrect browser name");
                 }

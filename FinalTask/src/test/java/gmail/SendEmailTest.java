@@ -1,5 +1,6 @@
 package gmail;
 
+import config.Configuration;
 import driver.Driver;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
@@ -18,9 +19,9 @@ import testng.GmailListener;
 @Listeners(GmailListener.class)
 public class SendEmailTest {
 
-    private static final String USERNAME = "seleniumtests30";
-    private static final String PASSWORD = "060788avavav";
-    private static final String EMAIL_ADDRESS = "seleniumtests10@gmail.com";
+    private static final String USERNAME = Configuration.getValue("gmail.username");
+    private static final String PASSWORD = Configuration.getValue("gmail.password");
+    private static final String EMAIL_ADDRESS = Configuration.getValue("gmail.address");
     private static final String EMAIL_SUBJECT = "Test email subject";
     private static final String EMAIL_BODY = "Some test text";
     WebDriver driver;
