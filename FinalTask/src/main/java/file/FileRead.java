@@ -8,18 +8,19 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class FileRead {
+    private static final String FILE_PATH = "src/test/resources/credentials.txt";
+
     public static Object[][] getCredentials() throws IOException {
-        HashMap<String, String> map = new HashMap<String,String>();
+        Map<String, String> map = new HashMap<String,String>();
 
         InputStreamReader reader = new InputStreamReader(System.in);
         BufferedReader br = new BufferedReader(reader);
 
-        FileInputStream input= new FileInputStream("src/test/resources/credentials.txt");
+        FileInputStream input= new FileInputStream(FILE_PATH);
         BufferedReader read= new BufferedReader(new InputStreamReader(input));
         String line = read.readLine();
 
-        while(line !=null)
-        {
+        while(line !=null) {
             String[] split = line.split(" ");
             map.put(split[0], split[1]);
             line = read.readLine();
