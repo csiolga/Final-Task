@@ -38,7 +38,6 @@ public class LoginTest {
     public void switchAccount() {
        loginPage = homePage.logout();
        loginPage.switchAccount();
-
     }
 
     @AfterClass(alwaysRun = true)

@@ -24,7 +24,7 @@ public class SendEmailTest {
     private static final String EMAIL_ADDRESS = Configuration.getValue("gmail.address");
     private static final String EMAIL_SUBJECT = "Test email subject";
     private static final String EMAIL_BODY = "Some test text";
-    WebDriver driver;
+    private WebDriver driver;
     private LoginPage loginPage;
     private HomePage homePage;
 
