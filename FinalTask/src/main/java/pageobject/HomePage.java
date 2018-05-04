@@ -82,8 +82,8 @@ public class HomePage extends Page {
         sentMailLink.click();
     }
 
-    public WebElement getLastSentEmailSubject() {
-        return lastSentEmailSubject;
+    public String getLastSentEmailSubject() {
+        return lastSentEmailSubject.getText();
     }
 
     public String getLastReceivedEmailSubject(){

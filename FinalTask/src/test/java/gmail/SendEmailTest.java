@@ -43,7 +43,7 @@ public class SendEmailTest {
     public void verifySentEmailInSentMailFolder() {
         homePage.sendEmail(EMAIL_ADDRESS, EMAIL_SUBJECT, EMAIL_BODY);
         homePage.openSentMailFolder();
-        String result = homePage.getLastSentEmailSubject().getText();
+        String result = homePage.getLastSentEmailSubject();
 
         Assert.assertEquals(EMAIL_SUBJECT, result,
                "Expected sent email's subject is '" + EMAIL_SUBJECT + "' but actual sent email's subject is '" + result + "'");
