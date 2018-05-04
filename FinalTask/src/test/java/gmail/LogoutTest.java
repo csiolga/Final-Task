@@ -29,7 +29,7 @@ public class LogoutTest {
 
     @BeforeClass(alwaysRun = true)
     @Parameters({"browser"})
-    public void setup(String browser) throws Exception {
+    public void setup(String browser) throws IOException {
         driver = Driver.getInstance().open(browser);
         loginPage = new LoginPage();
     }

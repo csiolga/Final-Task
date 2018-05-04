@@ -8,6 +8,8 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
+import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -43,47 +45,62 @@ public class Driver {
         return instance;
     }
 
+    private WebDriver createLocalDriver (String browser) {
+        if(browser.equalsIgnoreCase("chrome")) {
+            System.setProperty("webdriver.chrome.driver", "src/test/drivers/chromedriver.exe");
+            driver = new ChromeDriver();
+        } else if(browser.equalsIgnoreCase("firefox")) {
+            System.setProperty("webdriver.gecko.driver", "src/test/drivers/geckodriver.exe");
+            driver = new FirefoxDriver();
+        } else {
+            throw new RuntimeException("Incorrect browser name");
+        }
+
+        return driver;
+    }
+
+    private WebDriver createCloudDriver (String browser) throws MalformedURLException {
+        if (browser.equalsIgnoreCase("firefox")) {
+            desiredCaps = DesiredCapabilities.firefox();
+        } else if (browser.equalsIgnoreCase("chrome")) {
+            desiredCaps = DesiredCapabilities.chrome();
+        } else {
+            throw new RuntimeException("Incorrect browser name");
+        }
+
+        desiredCaps.setCapability("platform", "Windows 10");
+        driver = new RemoteWebDriver(new URL(CLOUD_URL), desiredCaps);
+
+        return driver;
+    }
+
+    private WebDriver createGridDriver(String browser) throws MalformedURLException{
+        if(browser.equalsIgnoreCase("chrome")) {
+            driver = new RemoteWebDriver(new URL(GRID_URL), DesiredCapabilities.chrome());
+        } else if(browser.equalsIgnoreCase("firefox")) {
+            driver = new RemoteWebDriver(new URL(GRID_URL), DesiredCapabilities.firefox());
+        }  else {
+            throw new RuntimeException("Incorrect browser name");
+        }
+
+        return driver;
+    }
+
     public WebDriver getDriver() {
         return driver;
     }
 
-    public WebDriver open(String browser) throws Exception {
+    public WebDriver open(String browser) throws IOException {
        switch (RUN_METHOD) {
             case 1:
-               if(browser.equalsIgnoreCase("chrome")) {
-                    System.setProperty("webdriver.chrome.driver", "src/test/drivers/chromedriver.exe");
-                    driver = new ChromeDriver();
-                } else if(browser.equalsIgnoreCase("firefox")) {
-                    System.setProperty("webdriver.gecko.driver", "src/test/drivers/geckodriver.exe");
-                    driver = new FirefoxDriver();
-                } else {
-                    throw new RuntimeException("Incorrect browser name");
-                }
+                createLocalDriver(browser);
                 break;
             case 2:
-                if (browser.equalsIgnoreCase("firefox")) {
-                    desiredCaps = DesiredCapabilities.firefox();
-                } else if (browser.equalsIgnoreCase("chrome")) {
-                    desiredCaps = DesiredCapabilities.chrome();
-                } else {
-                    throw new RuntimeException("Incorrect browser name");
-                }
-
-                desiredCaps.setCapability("platform", "Windows 10");
-                driver = new RemoteWebDriver(new URL(CLOUD_URL), desiredCaps);
+                createCloudDriver(browser);
                 break;
-
             case 3:
-                if(browser.equalsIgnoreCase("chrome")) {
-                    driver = new RemoteWebDriver(new URL(GRID_URL), DesiredCapabilities.chrome());
-
-                } else if(browser.equalsIgnoreCase("firefox")) {
-                    driver = new RemoteWebDriver(new URL(GRID_URL), DesiredCapabilities.firefox());
-                }  else {
-                    throw new RuntimeException("Incorrect browser name");
-                }
+                createGridDriver(browser);
                 break;
-
             default:
                 throw new RuntimeException("Incorrect run method");
         }

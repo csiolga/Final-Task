@@ -16,6 +16,8 @@ import ru.yandex.qatools.allure.annotations.Features;
 import ru.yandex.qatools.allure.annotations.TestCaseId;
 import testng.GmailListener;
 
+import java.io.IOException;
+
 @Listeners(GmailListener.class)
 public class DeleteEmailTest {
 
@@ -27,7 +29,7 @@ public class DeleteEmailTest {
 
     @BeforeClass
     @Parameters({"browser"})
-    public void setup(String browser) throws Exception {
+    public void setup(String browser) throws IOException {
         driver = Driver.getInstance().open(browser);
         loginPage = new LoginPage();
         homePage = loginPage.login(USERNAME, PASSWORD);
